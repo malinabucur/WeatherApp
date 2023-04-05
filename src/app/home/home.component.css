@@ -1,0 +1,114 @@
+/* background */
+.bg-home {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: brightness(90%) contrast(120%);
+}
+
+/* carousel */
+#carouselExampleControls {
+  /* top right bottom left */
+  padding: 4% 3% 4% 3%;
+  max-width: 1000px;
+  max-height: 500px;
+}
+
+.main-card {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px #fff;
+  width: 900px;
+  /* height: 400px; */
+  display: flex;
+}
+
+.card-title-container {
+  display: block;
+  height: 80px;
+  /* top right bottom left */
+  padding: 15px;
+}
+/* 
+.card-body {
+  display: flex;
+} */
+
+.card-title {
+  font-size: 22px;
+  font-weight: 400;
+  color: white;
+  letter-spacing: 1.5px;
+  display: flex;
+  margin-bottom: 0;
+}
+
+.location-icon {
+  margin-right: 8px;
+  font-size: 18px;
+  color: white;
+}
+
+.currentDate {
+  font-size: 15px;
+  color: white;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.currentTemperature {
+  color: white;
+  font-size: 70px;
+  font-weight: 100;
+  /* top right bottom left */
+  margin: 10px 0 0 0px;
+}
+
+/* second cards */
+.second-card {
+  background-color: transparent;
+  border: 1px #fff;
+  margin: 10px;
+  /* display: flex; */
+}
+
+.row.weather {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  height: 200px;
+  /* width: 200px; */
+  display: block;
+  text-align: center;
+}
+
+.second-title {
+  font-size: 15px;
+  color: black;
+  font-weight: 400;
+  /* letter-spacing: 1px; */
+  margin-bottom: 1px;
+  justify-content: center;
+}
+
+hr {
+  /* top right bottom (left) */
+  /* margin: 5px 65px 5px; */
+  width: 35px;
+  height: 2px;
+  background-color: black;
+  border: none;
+}
+
+.dayTemperature {
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+}

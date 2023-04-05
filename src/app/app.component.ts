@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MaterialModule } from 'src/Material-Module';
+import * as Popper from '@popperjs/core';
 
 @Component({
   selector: 'app-root',
