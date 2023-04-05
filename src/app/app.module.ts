@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MaterialModule } from 'src/Material-Module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,12 +20,10 @@ import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
-    MaterialModule,
     BrowserAnimationsModule,
     NgbModule,
     MdbCollapseModule,
     HttpClientModule,
-    
   ],
   providers: [],
   bootstrap: [AppComponent]
