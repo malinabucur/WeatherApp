@@ -1,11 +1,10 @@
-.navbar{
-  /* background-color: #89cff0; */
+.navbar {
   background-color: transparent;
   height: 50px;
   justify-content: start;
 }
 
-.logo{
+.logo {
   width: 40px;
   height: 40px;
   border-radius: 25px;
@@ -13,7 +12,7 @@
   margin-right: 15px;
 }
 
-.navbar-toggler{
+.navbar-toggler {
   border: none !important;
 }
 
@@ -22,7 +21,7 @@
   box-shadow: none;
 }
 
-a{
+a {
   color: white;
   text-decoration: none;
   font-size: 20px;
@@ -33,8 +32,14 @@ a:hover {
   color: whitesmoke;
 }
 
+/* search bar */
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 /* favourites link -- heart */
-.heart{
+.heart {
   color: white;
 }
 
@@ -50,8 +55,7 @@ a:hover {
 }
 
 /* hamburger menu animation */
-.animated-icon
- {
+.animated-icon {
   width: 30px;
   height: 20px;
   position: relative;
@@ -106,4 +110,10 @@ a:hover {
   top: 11px;
   width: 0%;
   left: 50%;
+}
+
+/* dropdown list */
+.dropdown-item{
+  background-color: white;
+  color: rgb(90, 89, 89);
 }
