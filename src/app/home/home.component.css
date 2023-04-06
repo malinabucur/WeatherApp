@@ -57,6 +57,7 @@
   color: white;
   font-weight: 400;
   margin-top: 2px;
+  margin-bottom: 0;
 }
 
 .currentTemperature {
@@ -64,7 +65,7 @@
   font-size: 70px;
   font-weight: 100;
   /* top right bottom left */
-  margin: 10px 0 0 0px;
+  margin: 10px 0 0 0;
 }
 
 /* second cards */
@@ -73,36 +74,50 @@
   border: 1px #fff;
   margin: 10px;
   /* display: flex; */
+  justify-content: center;
 }
 
-.row.weather {
+.daily-weather {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  text-align: center;
 }
+
+.hourly-weather {
+  margin: 0px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  overflow-y: scroll;
+  height: 400px;
+}
+
+/* .row.hourly-weather{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+} */
 
 .content {
   height: 200px;
-  /* width: 200px; */
   display: block;
-  text-align: center;
 }
 
 .second-title {
   font-size: 15px;
-  color: black;
+  color: white;
   font-weight: 400;
-  /* letter-spacing: 1px; */
-  margin-bottom: 1px;
   justify-content: center;
 }
 
 hr {
-  /* top right bottom (left) */
-  /* margin: 5px 65px 5px; */
-  width: 35px;
-  height: 2px;
+  /* top right bottom */
+  margin: 4px auto 4px;
+  width: 30px;
+  height: 1.5px;
   background-color: black;
   border: none;
 }
@@ -111,4 +126,47 @@ hr {
   color: white;
   font-size: 15px;
   font-weight: 400;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 0;
+}
+
+.hourTemperature {
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 0;
+}
+
+/* fav button */
+.fav-button {
+  color: white;
+  font-size: 25px;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.fav-button:hover {
+  color: red;
+}
+
+/* forecast buttons */
+.f-buttons {
+  margin-left: 100px;
+}
+
+.forecasts {
+  color: white;
+  font-size: 18px;
+  margin-left: 5px;
+  border-bottom: 1px solid white;
+}
+
+.forecasts.active {
+  border-bottom: 1px solid black;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
 }
