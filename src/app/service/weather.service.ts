@@ -20,11 +20,11 @@ export class WeatherService {
 
   getDailyForecast(city: string): Observable<any> {
     const dailyForecastURL = `${this.baseDailyForecastURL}/forecast.json?key=${this.apiKey}&q=${city}&days=7`;
-    return this.http.get(dailyForecastURL);
+    return this.http.get<WeatherModel>(dailyForecastURL);
   }
 
   getHourlyForecast(city: string): Observable<any> {
     const hourlyForecastURL = `${this.baseDailyForecastURL}/forecast.json?key=${this.apiKey}&q=${city}&days=1&hour=24`;
-    return this.http.get(hourlyForecastURL);
+    return this.http.get<WeatherModel>(hourlyForecastURL);
   }
 }
