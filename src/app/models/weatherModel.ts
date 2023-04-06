@@ -21,4 +21,23 @@ export interface WeatherModel {
         code: number;
       };
     };
+    forecast: {
+      forecastday: {
+        date: string;
+        day: {
+          avgtemp_c: number;
+          condition: {
+            icon: string;
+            text: string;
+          }
+        }
+        hour: {
+          temp_c: number;
+          condition:{
+            icon: string;
+            text: string;
+          }
+        }
+      }[]
+    };
   }
