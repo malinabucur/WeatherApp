@@ -28,10 +28,6 @@ a {
   font-weight: 500;
 }
 
-a:hover {
-  color: whitesmoke;
-}
-
 /* search bar */
 .form-control:focus {
   outline: none;
@@ -76,7 +72,7 @@ a:hover {
 }
 
 .animated-icon span {
-  background: #e3f2fd;
+  background: white;
 }
 
 .animated-icon span:nth-child(1) {
