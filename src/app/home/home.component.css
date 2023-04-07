@@ -12,7 +12,7 @@
 /* carousel */
 #carouselExampleControls {
   /* top right bottom left */
-  padding: 4% 3% 4% 3%;
+  padding: 2% 3% 4% 3%;
   max-width: 1000px;
   max-height: 500px;
 }
@@ -21,7 +21,7 @@
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   border: 1px #fff;
-  width: 900px;
+  width: 895px;
   /* height: 400px; */
   display: flex;
 }
@@ -62,10 +62,12 @@
 
 .currentTemperature {
   color: white;
-  font-size: 70px;
+  /* font-size: 70px; */
+  font-size: calc(100% + 2vw + 1vh);
+  font: bold;
   font-weight: 100;
   /* top right bottom left */
-  margin: 10px 0 0 0;
+  margin: 10px 0 0 15px;
 }
 
 /* second cards */
@@ -75,6 +77,8 @@
   margin: 10px;
   /* display: flex; */
   justify-content: center;
+  height: 20vh;
+  /* overflow-y: scroll; */
 }
 
 .daily-weather {
@@ -93,13 +97,6 @@
   overflow-y: scroll;
   height: 400px;
 }
-
-/* .row.hourly-weather{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  text-align: center;
-} */
 
 .content {
   height: 200px;
@@ -169,4 +166,30 @@ hr {
   border-top: 0;
   border-left: 0;
   border-right: 0;
+}
+
+/* dropdown + search cities */
+.dropdown{
+  text-align: center;
+  margin-top: 25px;
+}
+
+.dropdown-toggle{
+  background-color: white;
+  color: black;
+  border: none;
+  font-size: 20px;
+}
+
+.form-control, .form-control:focus{
+  box-shadow: none;
+  border: none;
+}
+
+.cities-list{
+  /* top right bottom left*/
+  padding: 5px 0 5px 15px;
+  font-size: 18px;
+  border: none;
+  background-color: transparent;
 }
