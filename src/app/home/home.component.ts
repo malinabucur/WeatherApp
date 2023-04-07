@@ -11,6 +11,8 @@ import { WeatherModel } from '../models/weatherModel';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('carousel') carouselRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('card') cardRef!: ElementRef<HTMLDivElement>;
+
   public Math = Math;
   public title: any;
   currentDate = new Date();
@@ -30,16 +32,6 @@ export class HomeComponent implements OnInit {
     this.showDaily = true;
   }
 
-  public getSelectedTitle(event: MouseEvent) {
-    setTimeout(() => {
-      const carouselItem = this.carouselRef.nativeElement.querySelector('.carousel-item.active');
-      const cardTitle = carouselItem?.querySelector('.card-title');
-      console.log(cardTitle?.textContent);
-    }, 650);
-
-    // console.log(cardTitle?.textContent);
-    
-  }
 
   constructor(
     private weatherService: WeatherService,
@@ -53,7 +45,6 @@ export class HomeComponent implements OnInit {
     });
 
     this.getForecastDaily('Cluj-Napoca');
-    // this.getForecastHourly('Cluj-Napoca');
 
     setInterval(() => {
       this.currentDate = new Date(); // update currentDate property every second
@@ -63,34 +54,79 @@ export class HomeComponent implements OnInit {
   // daily and hourly forecast
   dailyForecastData: any;
   hourlyForecastData: any;
-  errorMessage: string = '';
+
+  public getWeather(event: MouseEvent) {
+    let carouselItem;
+    let cardTitle;
+    // let element = event.target as HTMLElement;
+    // let typeOfForecast = element.id;
+
+    setTimeout(() => {
+      carouselItem = this.carouselRef.nativeElement.querySelector(
+        '.carousel-item.active'
+      );
+
+      cardTitle = carouselItem?.querySelector('.card-title');
+
+      if(cardTitle?.textContent != null){
+        this.getForecastDaily(cardTitle.textContent);
+      }
+      // aici am incercat sa fac o singura functie pentru carousel si pentru hourly/daily -> aveam delay prea mare
+      
+      // if(cardTitle?.textContent != null){
+      //   if(typeOfForecast == "hourly"){
+      //     this.showHourlyForecast();
+      //     this.getForecastHourly(cardTitle.textContent);
+  
+      //   }else{
+      //     this.showDailyForecast();
+      //     this.getForecastDaily(cardTitle.textContent);
+      //   }
+      // }
+    }, 650);
+  }
 
   getForecastDaily(city: string) {
     this.showDailyForecast();
-    this.weatherService.getDailyForecast(city).subscribe(
-      (data) => {
-        console.log(data);
-        this.dailyForecastData = data;
-      },
-      (error) => {
-        this.errorMessage = error.message;
-      }
+    this.weatherService.getDailyForecast(city).subscribe((data) => {
+      this.dailyForecastData = data;
+      this.temperature = data.current.temp_c
+    });
+  }
+
+  getForecastDailyOnButtonClick(event: MouseEvent){
+    let carouselItem;
+    let cardTitle;
+    carouselItem = this.carouselRef.nativeElement.querySelector(
+      '.carousel-item.active'
     );
+
+    cardTitle = carouselItem?.querySelector('.card-title');
+
+    if(cardTitle?.textContent != null){
+      this.getForecastDaily(cardTitle.textContent);
+    }
   }
 
   getForecastHourly(city: string) {
     this.showHourlyForecast();
-    this.weatherService.getDailyForecast(city).subscribe(
-      (data) => {
-        this.hourlyForecastData = data;
-        console.log(data);
-        console.log(this.showHourly);
-        console.log(data.forecast.forecastday[0].hour[0].condition.text);
-      },
-      (error) => {
-        this.errorMessage = error.message;
-      }
+    this.weatherService.getDailyForecast(city).subscribe((data) => {
+      this.hourlyForecastData = data;
+    });
+  }
+
+  getForecastHourlyOnButtonClick(event: MouseEvent){
+    let carouselItem;
+    let cardTitle;
+    carouselItem = this.carouselRef.nativeElement.querySelector(
+      '.carousel-item.active'
     );
+
+    cardTitle = carouselItem?.querySelector('.card-title');
+
+    if(cardTitle?.textContent != null){
+      this.getForecastHourly(cardTitle.textContent);
+    }
   }
 
   getDayOfWeek(dateString: string): string {
@@ -108,4 +144,8 @@ export class HomeComponent implements OnInit {
     return daysOfWeek[dayOfWeek];
   }
 
+  // getting the current hour for the hourly forecast
+  getCurrentHour(): number {
+    return new Date().getHours();
+  }
 }

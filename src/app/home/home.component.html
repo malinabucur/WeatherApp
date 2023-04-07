@@ -1,4 +1,8 @@
-<div id="carouselExampleControls" class="carousel carousel-dark slide mx-auto"#carousel>
+<div
+  id="carouselExampleControls"
+  class="carousel carousel-dark slide mx-auto"
+  #carousel
+>
   <div class="carousel-inner">
     <!-- CLUJ-NAPOCA -->
     <div class="carousel-item active">
@@ -11,7 +15,107 @@
                 <div class="d-flex" style="display: flex">
                   <i class="fa-solid fa-location-dot location-icon"></i>
                   <div class="col-2">
-                    <h5 class="card-title" data-card-title="Cluj-Napoca">Cluj-Napoca</h5>
+                    <h5 class="card-title">
+                      Cluj-Napoca
+                    </h5>
+                    <p class="d-flex currentDate">
+                      {{ currentDate | date : "EE dd MMMM HH:mm a" }}
+                      <button class="btn fav-button">
+                        <span class="fa fa-heart"></span>
+                      </button>
+                    </p>
+                  </div>
+                  <div class="col-2 ">
+                    <p class="currentTemperature">{{ temperature }}&deg;C</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- forecast buttons -->
+            <div class="d-flex f-buttons">
+              <button
+                id="hourly"
+                class="btn forecasts"
+                [class.active]="showHourly"
+                (click)="getForecastHourlyOnButtonClick($event)">
+                <!-- in loc de cluj napoca trebui sa luam card-title -->
+                Hourly
+              </button>
+              <button
+                id="daily"
+                class="btn forecasts"
+                [class.active]="showDaily"
+                (click)="getForecastDailyOnButtonClick($event)">
+                Daily
+              </button>
+            </div>
+
+            <!-- content -->
+            <!-- forecast on hours or weeks days -->
+            <div 
+              class="d-flex daily-weather col-4 col-sm-6 col-md-8 col-lg-12"
+              *ngIf="showDaily; dailyForecastData">
+              <div 
+                *ngFor="
+                  let forecast of dailyForecastData?.forecast?.forecastday.slice(1)">
+                <div class="card  second-card">
+                  <div class="card-body content" *ngIf="dailyForecastData">
+                    <img
+                      [src]="forecast.day.condition.icon"
+                      alt="{{ forecast.day.condition.text }}"/>
+                    <p class="card-text dayTemperature">
+                      {{ Math.floor(forecast.day.avgtemp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">
+                      {{ getDayOfWeek(forecast.date) }}
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="d-flex hourly-weather col-4 col-sm-6 col-md-8 col-lg-12"
+              *ngIf="showHourly; hourlyForecastData">
+              <div
+                *ngFor="let hour of hourlyForecastData?.forecast?.forecastday?.[0]?.hour; let i = index;">
+                <div
+                  class="card col-xs-12 col-md-2 col-lg-12 second-card"
+                  *ngIf="i >= getCurrentHour()">
+                  <div class="card-body content" *ngIf="hourlyForecastData">
+                    <img
+                      [src]="hour.condition.icon"
+                      alt="{{ hour.condition.text }}"/>
+                    <p class="card-text hourTemperature">
+                      {{ Math.floor(hour.temp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">{{ hour.time }}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUCURESTI -->
+    <div class="carousel-item">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card main-card">
+            <!-- title -->
+            <div class="card-body">
+              <div class="card-title-container">
+                <div style="display: flex">
+                  <i class="fa-solid fa-location-dot location-icon"></i>
+                  <div class="col-2">
+                    <h5 class="card-title">
+                      Bucuresti
+                    </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <button class="btn fav-button">
@@ -31,210 +135,61 @@
               <button
                 class="btn forecasts"
                 [class.active]="showHourly"
-                
-                (click)="getForecastHourly('Cluj-Napoca')"
-              >
-              <!-- in loc de cluj napoca trebui sa luam card-title -->
+                (click)="getForecastHourlyOnButtonClick($event)">
                 Hourly
               </button>
               <button
                 class="btn forecasts"
                 [class.active]="showDaily"
-                (click)="getForecastDaily('Cluj-Napoca')"
-              >
+                (click)="getForecastDailyOnButtonClick($event)">
                 Daily
               </button>
             </div>
 
             <!-- content -->
-            <!-- weather on hours or weeks days -->
-            <div class="d-flex daily-weather" *ngIf="showDaily, dailyForecastData">
-              <div *ngFor="let forecast of dailyForecastData?.forecast?.forecastday.slice(1)">
-              <div class="card col-xs-12 col-md-2 col-lg-12 second-card">
-                <div class="card-body content" *ngIf="dailyForecastData">
-                  <img [src]="forecast.day.condition.icon" alt="{{ forecast.day.condition.text }}">
-                  <p class="card-text dayTemperature">{{ Math.floor(forecast.day.avgtemp_c) }}&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">{{ getDayOfWeek(forecast.date) }}</h5>
-                </div>
-              </div>
-            </div>
-            </div>
-
-            <div class="d-flex hourly-weather" *ngIf="showHourly, hourlyForecastData">
-              <div *ngFor="let hour of hourlyForecastData?.forecast?.forecastday?.[0]?.hour">
+            <!-- forecast on hours or weeks days -->
+            <div
+              class="d-flex daily-weather"
+              *ngIf="showDaily; dailyForecastData">
+              <div
+                *ngFor="
+                  let forecast of dailyForecastData?.forecast?.forecastday.slice(1)">
                 <div class="card col-xs-12 col-md-2 col-lg-12 second-card">
-                  <div class="card-body content" *ngIf="hourlyForecastData">
-                    <img [src]="hour.condition.icon" alt="{{hour.condition.text}}">
-                    <p class="card-text hourTemperature">{{Math.floor(hour.temp_c)}}&deg;C</p>
-                    <hr/>
-                    <h5 class="card-title second-title">{{ hour.time}}</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- <div class="d-flex hourly-weather" *ngIf="showHourly, hourlyForecastData"> -->
-                <!-- <div *ngFor="let forecast of hourlyForecastData.data">
-                  <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                    <div class="card-body content">
-                      <img [src]="forecast.weather.icon" alt="{{ forecast.weather.description }}">
-                      <p class="card-text hourTemperature">{{ forecast.temp }}&deg;C</p>
-                      <hr />
-                      <h5 class="card-title second-title">{{ formatTime(forecast.timestamp_local) }}</h5>
-                    </div>
-                  </div>
-                </div> -->
-              
-  
-              <!-- <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">07:00</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">08:00</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">09:00</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">10:00</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">11:00</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">12:00</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">13:00</h5>
-                </div>
-              </div> -->
-            <!-- </div> -->
-            
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- BUCURESTI -->
-    <div class="carousel-item">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="card main-card">
-            <!-- title -->
-            <div class="card-body">
-              <div class="card-title-container">
-                <div style="display: flex">
-                  <i class="fa-solid fa-location-dot location-icon"></i>
-                  <div class="col-2">
-                    <h5 class="card-title" data-card-title="Bucuresti">Bucuresti</h5>
-                    <p class="currentDate">
-                      {{ currentDate | date : "EEEE, dd MMMM" }}
+                  <div class="card-body content" *ngIf="dailyForecastData">
+                    <img
+                      [src]="forecast.day.condition.icon"
+                      alt="{{ forecast.day.condition.text }}"
+                    />
+                    <p class="card-text dayTemperature">
+                      {{ Math.floor(forecast.day.avgtemp_c) }}&deg;C
                     </p>
-                  </div>
-                  <div class="col-2">
-                    <p class="currentTemperature">{{ temperature }}&deg;C</p>
+                    <hr />
+                    <h5 class="card-title second-title">
+                      {{ getDayOfWeek(forecast.date) }}
+                    </h5>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- forecast buttons -->
-            <div class="d-flex f-buttons">
-              <button
-                class="btn forecasts"
-                [class.active]="showHourly"
-                (click)="showHourlyForecast()"
-              >
-                Hourly
-              </button>
-              <button
-                class="btn forecasts"
-                [class.active]="showDaily"
-                (click)="showDailyForecast()"
-              >
-                Daily
-              </button>
-            </div>
-
-            <!-- content -->
-            <!-- weather on hours or weeks days -->
-            <div class="row daily-weather" *ngIf="showDaily">
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Monday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Tuesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Wednesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Thursday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Friday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Saturday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Sunday</h5>
+            <div
+              class="d-flex hourly-weather"
+              *ngIf="showHourly; hourlyForecastData">
+              <div
+                *ngFor="let hour of hourlyForecastData?.forecast?.forecastday?.[0]?.hour; let i = index;">
+                <div
+                  class="card col-xs-12 col-md-2 col-lg-12 second-card"
+                  *ngIf="i >= getCurrentHour()">
+                  <div class="card-body content" *ngIf="hourlyForecastData">
+                    <img
+                      [src]="hour.condition.icon"
+                      alt="{{ hour.condition.text }}"/>
+                    <p class="card-text hourTemperature">
+                      {{ Math.floor(hour.temp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">{{ hour.time }}</h5>
+                  </div>
                 </div>
               </div>
             </div>
@@ -254,12 +209,17 @@
                 <div style="display: flex">
                   <i class="fa-solid fa-location-dot location-icon"></i>
                   <div class="col-2">
-                    <h5 class="card-title">Brasov</h5>
-                    <p class="currentDate">
-                      {{ currentDate | date : "EEEE, dd MMMM" }}
+                    <h5 class="card-title">
+                      Brasov
+                    </h5>
+                    <p class="d-flex currentDate">
+                      {{ currentDate | date : "EE dd MMMM HH:mm a" }}
+                      <button class="btn fav-button">
+                        <span class="fa fa-heart"></span>
+                      </button>
                     </p>
                   </div>
-                  <div class="col-2">
+                  <div class="col-3">
                     <p class="currentTemperature">{{ temperature }}&deg;C</p>
                   </div>
                 </div>
@@ -271,69 +231,61 @@
               <button
                 class="btn forecasts"
                 [class.active]="showHourly"
-                (click)="showHourlyForecast()"
-              >
+                (click)="getForecastHourlyOnButtonClick($event)">
                 Hourly
               </button>
               <button
                 class="btn forecasts"
                 [class.active]="showDaily"
-                (click)="showDailyForecast()"
-              >
+                (click)="getForecastDailyOnButtonClick($event)">
                 Daily
               </button>
             </div>
 
             <!-- content -->
-            <!-- weather on hours or weeks days -->
-            <div class="row daily-weather" *ngIf="showDaily">
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Monday</h5>
+            <!-- forecast on hours or weeks days -->
+            <div
+              class="d-flex daily-weather"
+              *ngIf="showDaily; dailyForecastData">
+              <div
+                *ngFor="
+                  let forecast of dailyForecastData?.forecast?.forecastday.slice(1)">
+                <div class="card col-xs-12 col-md-2 col-lg-12 second-card">
+                  <div class="card-body content" *ngIf="dailyForecastData">
+                    <img
+                      [src]="forecast.day.condition.icon"
+                      alt="{{ forecast.day.condition.text }}"
+                    />
+                    <p class="card-text dayTemperature">
+                      {{ Math.floor(forecast.day.avgtemp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">
+                      {{ getDayOfWeek(forecast.date) }}
+                    </h5>
+                  </div>
                 </div>
               </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Tuesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Wednesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Thursday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Friday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Saturday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Sunday</h5>
+            </div>
+
+            <div
+              class="d-flex hourly-weather"
+              *ngIf="showHourly; hourlyForecastData">
+              <div
+                *ngFor="let hour of hourlyForecastData?.forecast?.forecastday?.[0]?.hour; let i = index;">
+                <div
+                  class="card col-xs-12 col-md-2 col-lg-12 second-card"
+                  *ngIf="i >= getCurrentHour()">
+                  <div class="card-body content" *ngIf="hourlyForecastData">
+                    <img
+                      [src]="hour.condition.icon"
+                      alt="{{ hour.condition.text }}"/>
+                    <p class="card-text hourTemperature">
+                      {{ Math.floor(hour.temp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">{{ hour.time }}</h5>
+                  </div>
                 </div>
               </div>
             </div>
@@ -353,9 +305,14 @@
                 <div style="display: flex">
                   <i class="fa-solid fa-location-dot location-icon"></i>
                   <div class="col-2">
-                    <h5 class="card-title">Timisoara</h5>
-                    <p class="currentDate">
-                      {{ currentDate | date : "EEEE, dd MMMM" }}
+                    <h5 class="card-title">
+                      Timisoara
+                    </h5>
+                    <p class="d-flex currentDate">
+                      {{ currentDate | date : "EE dd MMMM HH:mm a" }}
+                      <button class="btn fav-button">
+                        <span class="fa fa-heart"></span>
+                      </button>
                     </p>
                   </div>
                   <div class="col-2">
@@ -370,69 +327,61 @@
               <button
                 class="btn forecasts"
                 [class.active]="showHourly"
-                (click)="showHourlyForecast()"
-              >
+                (click)="getForecastHourlyOnButtonClick($event)">
                 Hourly
               </button>
               <button
                 class="btn forecasts"
                 [class.active]="showDaily"
-                (click)="showDailyForecast()"
-              >
+                (click)="getForecastDailyOnButtonClick($event)">
                 Daily
               </button>
             </div>
 
             <!-- content -->
-            <!-- weather on hours or weeks days -->
-            <div class="row daily-weather" *ngIf="showDaily">
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Monday</h5>
+            <!-- forecast on hours or weeks days -->
+            <div
+              class="d-flex daily-weather"
+              *ngIf="showDaily; dailyForecastData">
+              <div
+                *ngFor="
+                  let forecast of dailyForecastData?.forecast?.forecastday.slice(1)">
+                <div class="card col-xs-12 col-md-2 col-lg-12 second-card">
+                  <div class="card-body content" *ngIf="dailyForecastData">
+                    <img
+                      [src]="forecast.day.condition.icon"
+                      alt="{{ forecast.day.condition.text }}"
+                    />
+                    <p class="card-text dayTemperature">
+                      {{ Math.floor(forecast.day.avgtemp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">
+                      {{ getDayOfWeek(forecast.date) }}
+                    </h5>
+                  </div>
                 </div>
               </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Tuesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Wednesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Thursday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Friday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Saturday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Sunday</h5>
+            </div>
+
+            <div
+              class="d-flex hourly-weather"
+              *ngIf="showHourly; hourlyForecastData">
+              <div
+                *ngFor="let hour of hourlyForecastData?.forecast?.forecastday?.[0]?.hour; let i = index;">
+                <div
+                  class="card col-xs-12 col-md-2 col-lg-12 second-card"
+                  *ngIf="i >= getCurrentHour()">
+                  <div class="card-body content" *ngIf="hourlyForecastData">
+                    <img
+                      [src]="hour.condition.icon"
+                      alt="{{ hour.condition.text }}"/>
+                    <p class="card-text hourTemperature">
+                      {{ Math.floor(hour.temp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">{{ hour.time }}</h5>
+                  </div>
                 </div>
               </div>
             </div>
@@ -452,9 +401,14 @@
                 <div style="display: flex">
                   <i class="fa-solid fa-location-dot location-icon"></i>
                   <div class="col-2">
-                    <h5 class="card-title">Iasi</h5>
-                    <p class="currentDate">
-                      {{ currentDate | date : "EEEE, dd MMMM" }}
+                    <h5 class="card-title">
+                      Iasi
+                    </h5>
+                    <p class="d-flex currentDate">
+                      {{ currentDate | date : "EE dd MMMM HH:mm a" }}
+                      <button class="btn fav-button">
+                        <span class="fa fa-heart"></span>
+                      </button>
                     </p>
                   </div>
                   <div class="col-2">
@@ -469,69 +423,61 @@
               <button
                 class="btn forecasts"
                 [class.active]="showHourly"
-                (click)="showHourlyForecast()"
-              >
+                (click)="getForecastHourlyOnButtonClick($event)">
                 Hourly
               </button>
               <button
                 class="btn forecasts"
                 [class.active]="showDaily"
-                (click)="showDailyForecast()"
-              >
+                (click)="getForecastDailyOnButtonClick($event)">
                 Daily
               </button>
             </div>
 
             <!-- content -->
-            <!-- weather on hours or weeks days -->
-            <div class="row daily-weather" *ngIf="showDaily">
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Monday</h5>
+            <!-- forecast on hours or weeks days -->
+            <div
+              class="d-flex daily-weather"
+              *ngIf="showDaily; dailyForecastData">
+              <div
+                *ngFor="
+                  let forecast of dailyForecastData?.forecast?.forecastday.slice(1)">
+                <div class="card col-xs-12 col-md-2 col-lg-12 second-card">
+                  <div class="card-body content" *ngIf="dailyForecastData">
+                    <img
+                      [src]="forecast.day.condition.icon"
+                      alt="{{ forecast.day.condition.text }}"
+                    />
+                    <p class="card-text dayTemperature">
+                      {{ Math.floor(forecast.day.avgtemp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">
+                      {{ getDayOfWeek(forecast.date) }}
+                    </h5>
+                  </div>
                 </div>
               </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Tuesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Wednesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Thursday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Friday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Saturday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Sunday</h5>
+            </div>
+
+            <div
+              class="d-flex hourly-weather"
+              *ngIf="showHourly; hourlyForecastData">
+              <div
+                *ngFor="let hour of hourlyForecastData?.forecast?.forecastday?.[0]?.hour; let i = index;">
+                <div
+                  class="card col-xs-12 col-md-2 col-lg-12 second-card"
+                  *ngIf="i >= getCurrentHour()">
+                  <div class="card-body content" *ngIf="hourlyForecastData">
+                    <img
+                      [src]="hour.condition.icon"
+                      alt="{{ hour.condition.text }}"/>
+                    <p class="card-text hourTemperature">
+                      {{ Math.floor(hour.temp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">{{ hour.time }}</h5>
+                  </div>
                 </div>
               </div>
             </div>
@@ -551,9 +497,14 @@
                 <div style="display: flex">
                   <i class="fa-solid fa-location-dot location-icon"></i>
                   <div class="col-2">
-                    <h5 class="card-title">Sibiu</h5>
-                    <p class="currentDate">
-                      {{ currentDate | date : "EEEE, dd MMMM" }}
+                    <h5 class="card-title">
+                      Sibiu
+                    </h5>
+                    <p class="d-flex currentDate">
+                      {{ currentDate | date : "EE dd MMMM HH:mm a" }}
+                      <button class="btn fav-button">
+                        <span class="fa fa-heart"></span>
+                      </button>
                     </p>
                   </div>
                   <div class="col-2">
@@ -563,66 +514,66 @@
               </div>
             </div>
 
-             <!-- forecast buttons -->
-             <div class="d-flex f-buttons">
-              <button class="btn forecasts" [class.active]="showHourly" (click)="showHourlyForecast()">
+            <!-- forecast buttons -->
+            <div class="d-flex f-buttons">
+              <button
+                class="btn forecasts"
+                [class.active]="showHourly"
+                (click)="getForecastHourlyOnButtonClick($event)">
                 Hourly
               </button>
-              <button class="btn forecasts" [class.active]="showDaily" (click)="showDailyForecast()">
+              <button
+                class="btn forecasts"
+                [class.active]="showDaily"
+                (click)="getForecastDailyOnButtonClick($event)">
                 Daily
               </button>
             </div>
 
             <!-- content -->
-            <!-- weather on hours or weeks days -->
-            <div class="row daily-weather" *ngIf="showDaily">
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Monday</h5>
+            <!-- forecast on hours or weeks days -->
+            <div
+              class="d-flex daily-weather"
+              *ngIf="showDaily; dailyForecastData">
+              <div
+                *ngFor="
+                  let forecast of dailyForecastData?.forecast?.forecastday.slice(1)">
+                <div class="card col-xs-12 col-md-2 col-lg-12 second-card">
+                  <div class="card-body content" *ngIf="dailyForecastData">
+                    <img
+                      [src]="forecast.day.condition.icon"
+                      alt="{{ forecast.day.condition.text }}"
+                    />
+                    <p class="card-text dayTemperature">
+                      {{ Math.floor(forecast.day.avgtemp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">
+                      {{ getDayOfWeek(forecast.date) }}
+                    </h5>
+                  </div>
                 </div>
               </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Tuesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Wednesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Thursday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Friday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Saturday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Sunday</h5>
+            </div>
+
+            <div
+              class="d-flex hourly-weather"
+              *ngIf="showHourly; hourlyForecastData">
+              <div
+                *ngFor="let hour of hourlyForecastData?.forecast?.forecastday?.[0]?.hour; let i = index;">
+                <div
+                  class="card col-xs-12 col-md-2 col-lg-12 second-card"
+                  *ngIf="i >= getCurrentHour()">
+                  <div class="card-body content" *ngIf="hourlyForecastData">
+                    <img
+                      [src]="hour.condition.icon"
+                      alt="{{ hour.condition.text }}"/>
+                    <p class="card-text hourTemperature">
+                      {{ Math.floor(hour.temp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">{{ hour.time }}</h5>
+                  </div>
                 </div>
               </div>
             </div>
@@ -642,9 +593,14 @@
                 <div style="display: flex">
                   <i class="fa-solid fa-location-dot location-icon"></i>
                   <div class="col-2">
-                    <h5 class="card-title">Constanta</h5>
-                    <p class="currentDate">
-                      {{ currentDate | date : "EEEE, dd MMMM" }}
+                    <h5 class="card-title">
+                      Constanta
+                    </h5>
+                    <p class="d-flex currentDate">
+                      {{ currentDate | date : "EE dd MMMM HH:mm a" }}
+                      <button class="btn fav-button">
+                        <span class="fa fa-heart"></span>
+                      </button>
                     </p>
                   </div>
                   <div class="col-2">
@@ -654,66 +610,66 @@
               </div>
             </div>
 
-             <!-- forecast buttons -->
-             <div class="d-flex f-buttons">
-              <button class="btn forecasts" [class.active]="showHourly" (click)="showHourlyForecast()">
+            <!-- forecast buttons -->
+            <div class="d-flex f-buttons">
+              <button
+                class="btn forecasts"
+                [class.active]="showHourly"
+                (click)="getForecastHourlyOnButtonClick($event)">
                 Hourly
               </button>
-              <button class="btn forecasts" [class.active]="showDaily" (click)="showDailyForecast()">
+              <button
+                class="btn forecasts"
+                [class.active]="showDaily"
+                (click)="getForecastDailyOnButtonClick($event)">
                 Daily
               </button>
             </div>
 
             <!-- content -->
-            <!-- weather on hours or weeks days -->
-            <div class="row daily-weather" *ngIf="showDaily">
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Monday</h5>
+            <!-- forecast on hours or weeks days -->
+            <div
+              class="d-flex daily-weather"
+              *ngIf="showDaily; dailyForecastData">
+              <div
+                *ngFor="
+                  let forecast of dailyForecastData?.forecast?.forecastday.slice(1)">
+                <div class="card col-xs-12 col-md-2 col-lg-12 second-card">
+                  <div class="card-body content" *ngIf="dailyForecastData">
+                    <img
+                      [src]="forecast.day.condition.icon"
+                      alt="{{ forecast.day.condition.text }}"
+                    />
+                    <p class="card-text dayTemperature">
+                      {{ Math.floor(forecast.day.avgtemp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">
+                      {{ getDayOfWeek(forecast.date) }}
+                    </h5>
+                  </div>
                 </div>
               </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Tuesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Wednesday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Thursday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Friday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Saturday</h5>
-                </div>
-              </div>
-              <div class="card col-xs-12 col-md-2 col-lg-1 second-card">
-                <div class="card-body content">
-                  <p class="card-text dayTemperature">15&deg;C</p>
-                  <hr />
-                  <h5 class="card-title second-title">Sunday</h5>
+            </div>
+
+            <div
+              class="d-flex hourly-weather"
+              *ngIf="showHourly; hourlyForecastData">
+              <div
+                *ngFor="let hour of hourlyForecastData?.forecast?.forecastday?.[0]?.hour; let i = index;">
+                <div
+                  class="card col-xs-12 col-md-2 col-lg-12 second-card"
+                  *ngIf="i >= getCurrentHour()">
+                  <div class="card-body content" *ngIf="hourlyForecastData">
+                    <img
+                      [src]="hour.condition.icon"
+                      alt="{{ hour.condition.text }}"/>
+                    <p class="card-text hourTemperature">
+                      {{ Math.floor(hour.temp_c) }}&deg;C
+                    </p>
+                    <hr />
+                    <h5 class="card-title second-title">{{ hour.time }}</h5>
+                  </div>
                 </div>
               </div>
             </div>
@@ -729,7 +685,7 @@
     type="button"
     data-bs-target="#carouselExampleControls"
     data-bs-slide="prev"
-    (click)="getSelectedTitle($event)"
+    (click)="getWeather($event)"
   >
     <span class="carousel-control-prev-icon"></span>
     <span class="visually-hidden">Previous</span>
@@ -739,7 +695,7 @@
     type="button"
     data-bs-target="#carouselExampleControls"
     data-bs-slide="next"
-    (click)="getSelectedTitle($event)"
+    (click)="getWeather($event)"
   >
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
