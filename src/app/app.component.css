@@ -1,6 +1,9 @@
 .navbar {
   background-color: transparent;
   height: 50px;
+}
+
+.container-fluid{
   justify-content: start;
 }
 
@@ -12,15 +15,6 @@
   margin-right: 15px;
 }
 
-.navbar-toggler {
-  border: none !important;
-}
-
-.navbar-toggler:focus {
-  outline: none;
-  box-shadow: none;
-}
-
 a {
   color: white;
   text-decoration: none;
@@ -28,84 +22,9 @@ a {
   font-weight: 500;
 }
 
-/* search bar */
-.form-control:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-/* favourites link -- heart */
-.heart {
+/* favourites link */
+.nav-link{
   color: white;
-}
-
-.heart:hover {
-  color: red;
-  cursor: pointer;
-}
-
-.heart:hover:before {
-  content: "\f004";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-}
-
-/* hamburger menu animation */
-.animated-icon {
-  width: 30px;
-  height: 20px;
-  position: relative;
-  margin: 0px;
-  transition: 0.5s ease-in-out;
-  cursor: pointer;
-}
-
-.animated-icon span {
-  display: block;
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  border-radius: 9px;
-  opacity: 1;
-  left: 0;
-  transition: 0.25s ease-in-out;
-}
-
-.animated-icon span {
-  background: white;
-}
-
-.animated-icon span:nth-child(1) {
-  top: 0px;
-}
-
-.animated-icon span:nth-child(2),
-.animated-icon span:nth-child(3) {
-  top: 10px;
-}
-
-.animated-icon span:nth-child(4) {
-  top: 20px;
-}
-
-.animated-icon.open span:nth-child(1) {
-  top: 11px;
-  width: 0%;
-  left: 50%;
-}
-
-.animated-icon.open span:nth-child(2) {
-  transform: rotate(45deg);
-}
-
-.animated-icon.open span:nth-child(3) {
-  transform: rotate(-45deg);
-}
-
-.animated-icon.open span:nth-child(4) {
-  top: 11px;
-  width: 0%;
-  left: 50%;
 }
 
 /* dropdown list */

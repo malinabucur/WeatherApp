@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
+import { FavoritesService } from './service/favorites.service';
 
 
 @Component({
@@ -8,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'WeatherApp';
+
+  favorites: string[] = [];
+  
+  constructor(private favoritesService: FavoritesService){
+    this.favorites = favoritesService.favorites;
+  }
+
+  onFavListChanged(favorites: string[]) {
+    this.favorites = favorites;
+  }
 }
