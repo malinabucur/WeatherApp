@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { WeatherService } from '../service/weather.service';
 import { HttpClient } from '@angular/common/http';
-import { WeatherModel } from '../models/weatherModel';
+import { FavoritesService } from '../service/favorites.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +9,57 @@ import { WeatherModel } from '../models/weatherModel';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+
+  constructor(
+    private weatherService: WeatherService,
+    private http: HttpClient,
+    private favoritesService: FavoritesService
+  ) {}
+
+  ngOnInit(): void {
+    this.filteredCities = this.cityNames;
+
+    this.weatherService.getCurrentWeather().subscribe((temp) => {
+      console.log(temp);
+      this.temperature = temp.current.temp_c;
+    });
+
+    this.getForecastDaily('Cluj-Napoca');
+
+    setInterval(() => {
+      this.currentDate = new Date(); // update currentDate property every second
+    }, 1000);
+  }
+
+  // add city to favorites
+  isFavorite = false;
+  favorites: string[] = [];
+
+  onFavListChanged(favorites: string[]) {
+    this.favorites = favorites;
+  }
+
+  addToFav(event: MouseEvent) {
+    const title = (event.target as HTMLElement).closest('.card')?.querySelector('.card-title')?.textContent?.trim();
+    if (title) {
+      const index = this.favoritesService.favorites.indexOf(title);
+      if (index === -1) {
+        this.favoritesService.favorites.push(title);
+        console.log('Added to favorites:', title);
+        (event.target as HTMLElement)?.classList.add('fas');
+        (event.target as HTMLElement).classList.remove('far');
+        this.isFavorite = true;
+      } else {
+        this.favoritesService.favorites.splice(index, 1);
+        console.log('Removed from favorites:', title);
+        (event.target as HTMLElement).classList.add('far');
+        (event.target as HTMLElement).classList.remove('fas');
+        this.isFavorite = false;
+      }
+    }
+  }
+
+  // list of available cites + searchbar
   @ViewChild('dropdownBtn') dropdownBtn: any;
   cityNames: string[] = [];
   filteredCities: string[] = [];
@@ -20,7 +71,7 @@ export class HomeComponent implements OnInit {
       // extract the city name from the title
       const cityName = title.textContent?.trim();
 
-      // add the city name to the array if it's not already there
+      // add the city name to the array 
       if (cityName && !this.cityNames.includes(cityName)) {
         this.cityNames.push(cityName);
       }
@@ -38,6 +89,7 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
   @ViewChild('carousel') carousel!: ElementRef;
   @ViewChild('carousel') carouselRef!: ElementRef<HTMLDivElement>;
   @ViewChild('card') cardRef!: ElementRef<HTMLDivElement>;
@@ -48,6 +100,8 @@ export class HomeComponent implements OnInit {
       city.toLowerCase().includes(searchTerm)
     );
   }
+
+  // go to the selected city from the list 
   scrollToCity(cityName: string) {
     let carouselItem;
     let selecetCarouselItem;
@@ -69,24 +123,9 @@ export class HomeComponent implements OnInit {
     this.getForecastDaily(cityName);
   }
 
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  public Math = Math;
+  public Math = Math;         // get integer values
   public title: any;
-  currentDate = new Date();
+  currentDate = new Date();    // get current date and hour automatically - no refresh needed      
 
   temperature!: number;
 
@@ -101,25 +140,6 @@ export class HomeComponent implements OnInit {
   showDailyForecast() {
     this.showHourly = false;
     this.showDaily = true;
-  }
-
-  constructor(
-    private weatherService: WeatherService,
-    private http: HttpClient
-  ) {}
-
-  ngOnInit(): void {
-    this.filteredCities = this.cityNames;
-    this.weatherService.getCurrentWeather().subscribe((temp) => {
-      console.log(temp);
-      this.temperature = temp.current.temp_c;
-    });
-
-    this.getForecastDaily('Cluj-Napoca');
-
-    setInterval(() => {
-      this.currentDate = new Date(); // update currentDate property every second
-    }, 1000);
   }
 
   // daily and hourly forecast
@@ -142,8 +162,8 @@ export class HomeComponent implements OnInit {
       if (cardTitle?.textContent != null) {
         this.getForecastDaily(cardTitle.textContent);
       }
-      // aici am incercat sa fac o singura functie pentru carousel si pentru hourly/daily -> aveam delay prea mare
 
+      // aici am incercat sa fac o singura functie pentru carousel si pentru hourly/daily -> aveam delay prea mare
       // if(cardTitle?.textContent != null){
       //   if(typeOfForecast == "hourly"){
       //     this.showHourlyForecast();
@@ -200,6 +220,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // get the days of the week for the daily forecast instead of dat (dd/mm/yyyy)
   getDayOfWeek(dateString: string): string {
     const daysOfWeek = [
       'Sunday',

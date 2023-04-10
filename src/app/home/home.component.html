@@ -1,4 +1,4 @@
-<!-- search bar -->
+<!-- checking available cities -->
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" #dropdownBtn>
     Available Cities
@@ -12,7 +12,6 @@
     </button>
   </ul>
 </div>
-
 
 <!-- carousel -->
 <div
@@ -37,9 +36,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -134,9 +133,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -230,9 +229,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -326,9 +325,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -422,12 +421,12 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
-                  <div class="col-2">
+                  <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
                   </div>
                 </div>
@@ -518,9 +517,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -614,9 +613,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -710,9 +709,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -806,9 +805,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -902,9 +901,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -998,9 +997,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -1094,9 +1093,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -1190,9 +1189,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -1286,9 +1285,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -1382,9 +1381,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
@@ -1478,9 +1477,9 @@
                     </h5>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
-                      <button class="btn fav-button">
-                        <span class="fa fa-heart"></span>
-                      </button>
+                      <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
+                        <span class="far fa-heart"></span>
+                      </span>
                     </p>
                   </div>
                   <div class="col-3">
