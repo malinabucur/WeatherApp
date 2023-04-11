@@ -14,24 +14,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 * The application allows the user to see the current weather + the weather condition, as well as the city name, date and hour:
 
-![header](https://user-images.githubusercontent.com/109577091/231229177-e7621d3a-99bd-45e8-98ea-2607659c4c6f.png)
+![header](https://user-images.githubusercontent.com/109577091/231239580-4cd41f02-4bf4-479f-a4ea-488db4055fc9.png)
 
-* The application allows the user to forecast over several days and hours:
+* The application allows the user to forecast over several days and hours. My application is also responsive, here you can see some pictures for desktop and mobile:
 
-![daily_forecast](https://user-images.githubusercontent.com/109577091/231229275-a2afa4dc-bd2a-46a4-bfcc-08bd31c93d75.png)
+![laptop](https://user-images.githubusercontent.com/109577091/231239627-a64f5a68-5d9f-4003-a3ba-e3f95374a8d8.png)
 
-![hourly_forecast](https://user-images.githubusercontent.com/109577091/231229295-1edb47de-040e-4f5f-993f-3a037cf5d82b.png)
+![mobile](https://user-images.githubusercontent.com/109577091/231239648-8d9c240d-be81-409e-ba92-c86e54010655.png)
 
 * The users can visualize multiple cities (list of cities + search bar):
 
-![cities_list](https://user-images.githubusercontent.com/109577091/231232793-c2bbf5e4-5ec7-4a2a-beee-ae87dce84c4b.png)
+![cities_list](https://user-images.githubusercontent.com/109577091/231239843-e22c0347-46c0-4cf5-8336-954cb7849a75.png)
 
 * The users can add cities to a favorites list by clicking on the heart icon found on each card:
 
-![fav button list](https://user-images.githubusercontent.com/109577091/231230032-5b591d52-4918-4d8f-a971-c8ccf5301c37.png)
-
-* Mobile responsiveness (320px):
-
-![320px](https://user-images.githubusercontent.com/109577091/231234387-ade836ac-e33b-47b3-b487-ef3bc27170ac.png)
-
-
+![fav button list](https://user-images.githubusercontent.com/109577091/231239908-ed79799a-9f2b-4d9c-a29c-f772191786a0.png)
