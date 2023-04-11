@@ -2,26 +2,36 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
 
-## Development server
+## Mandatory requirements fulfilled:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+*	My application is functional and is running on a localhost.
+*	The code is uploaded on GitHub – public repository.
+*	The application is linked to a Weather API (https://www.weatherapi.com/) and has real dates.
+*	The application is responsive for desktop and mobile.
+*	Semantic use of Web elements.
 
-## Code scaffolding
+## Optional features that I added:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* The application allows the user to see the current weather + the weather condition, as well as the city name, date and hour:
 
-## Build
+![header](https://user-images.githubusercontent.com/109577091/231229177-e7621d3a-99bd-45e8-98ea-2607659c4c6f.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* The application allows the user to forecast over several days and hours:
 
-## Running unit tests
+![daily_forecast](https://user-images.githubusercontent.com/109577091/231229275-a2afa4dc-bd2a-46a4-bfcc-08bd31c93d75.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![hourly_forecast](https://user-images.githubusercontent.com/109577091/231229295-1edb47de-040e-4f5f-993f-3a037cf5d82b.png)
 
-## Running end-to-end tests
+* The users can visualize multiple cities (list of cities + search bar):
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![cities_list](https://user-images.githubusercontent.com/109577091/231232793-c2bbf5e4-5ec7-4a2a-beee-ae87dce84c4b.png)
 
-## Further help
+* The users can add cities to a favorites list by clicking on the heart icon found on each card:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![fav button list](https://user-images.githubusercontent.com/109577091/231230032-5b591d52-4918-4d8f-a971-c8ccf5301c37.png)
+
+* Mobile responsiveness (320px):
+
+![320px](https://user-images.githubusercontent.com/109577091/231234387-ade836ac-e33b-47b3-b487-ef3bc27170ac.png)
+
+
