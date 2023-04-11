@@ -22,7 +22,7 @@ a {
   font-weight: 500;
 }
 
-/* favourites link */
+/* favourites list */
 .nav-link{
   color: white;
 }
@@ -31,4 +31,9 @@ a {
 .dropdown-item{
   background-color: white;
   color: rgb(90, 89, 89);
+}
+
+#favoritesDropDown{
+ position: absolute;
+ z-index: 1;
 }
