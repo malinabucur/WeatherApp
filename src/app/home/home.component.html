@@ -1,6 +1,13 @@
 <!-- checking available cities -->
 <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" #dropdownBtn>
+  <button 
+    class="btn btn-secondary dropdown-toggle" 
+    type="button" 
+    id="dropdownMenuButton1" 
+    data-bs-toggle="dropdown" 
+    aria-expanded="false" 
+    #dropdownBtn 
+    data-bs-auto-close="outside">
     Available Cities
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -34,6 +41,7 @@
                     <h5 class="card-title">
                        Cluj-Napoca
                     </h5>
+                    <!-- <p class="weatherCondition">{{condition}}</p> -->
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -43,6 +51,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -140,6 +150,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -236,6 +248,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -332,6 +346,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -428,6 +444,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -524,6 +542,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -620,6 +640,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -716,6 +738,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -812,6 +836,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -908,6 +934,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1004,6 +1032,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1100,6 +1130,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1196,6 +1228,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1292,6 +1326,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1388,6 +1424,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1484,6 +1522,8 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
+                    <br>
+                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1581,4 +1621,4 @@
   </button>
 </div>
 
-<img src="/assets/images/bg7.jpg" alt="bg-img" class="bg-home" />
+<img class="bg-home" src="/assets/images/bg5.jpg"> 

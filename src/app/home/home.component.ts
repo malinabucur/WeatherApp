@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { WeatherService } from '../service/weather.service';
 import { HttpClient } from '@angular/common/http';
 import { FavoritesService } from '../service/favorites.service';
+import { WeatherModel } from '../models/weatherModel';
 
 @Component({
   selector: 'app-home',
@@ -9,19 +10,51 @@ import { FavoritesService } from '../service/favorites.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('carousel') carousel!: ElementRef;
+  @ViewChild('carousel') carouselRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('card') cardRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('dropdownBtn', { static: true }) dropdownBtn!: ElementRef;
+  
+
+  temperature!: number;
+  condition: string = '';
+  isFavorite = false;
+  favorites: string[] = [];
+  cityNames: string[] = [];
+  filteredCities: string[] = [];
+  public Math = Math; // get integer values
+  public title: any;
+  currentDate = new Date(); // get current date and hour automatically - no refresh needed
+  showHourly = false;
+  showDaily = true;
+  dailyForecastData: any;
+  hourlyForecastData: any;
 
   constructor(
     private weatherService: WeatherService,
     private http: HttpClient,
-    private favoritesService: FavoritesService
+    private favoritesService: FavoritesService,
+    private elementRef: ElementRef
   ) {}
 
   ngOnInit(): void {
     this.filteredCities = this.cityNames;
 
+    // hide the dropdown when clicking outside of it
+    const dropdownMenu = this.elementRef.nativeElement.querySelector('.dropdown-menu');
+    dropdownMenu.addEventListener('click', (event: Event) => {
+      event.stopPropagation();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!this.dropdownBtn.nativeElement.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+      }
+    });
+
     this.weatherService.getCurrentWeather().subscribe((temp) => {
-      console.log(temp);
       this.temperature = temp.current.temp_c;
+      this.condition = temp.current.condition.text;
     });
 
     this.getForecastDaily('Cluj-Napoca');
@@ -32,26 +65,24 @@ export class HomeComponent implements OnInit {
   }
 
   // add city to favorites
-  isFavorite = false;
-  favorites: string[] = [];
-
   onFavListChanged(favorites: string[]) {
     this.favorites = favorites;
   }
 
   addToFav(event: MouseEvent) {
-    const title = (event.target as HTMLElement).closest('.card')?.querySelector('.card-title')?.textContent?.trim();
+    const title = (event.target as HTMLElement)
+      .closest('.card')
+      ?.querySelector('.card-title')
+      ?.textContent?.trim();
     if (title) {
       const index = this.favoritesService.favorites.indexOf(title);
       if (index === -1) {
         this.favoritesService.favorites.push(title);
-        console.log('Added to favorites:', title);
         (event.target as HTMLElement)?.classList.add('fas');
         (event.target as HTMLElement).classList.remove('far');
         this.isFavorite = true;
       } else {
         this.favoritesService.favorites.splice(index, 1);
-        console.log('Removed from favorites:', title);
         (event.target as HTMLElement).classList.add('far');
         (event.target as HTMLElement).classList.remove('fas');
         this.isFavorite = false;
@@ -60,10 +91,6 @@ export class HomeComponent implements OnInit {
   }
 
   // list of available cites + searchbar
-  @ViewChild('dropdownBtn') dropdownBtn: any;
-  cityNames: string[] = [];
-  filteredCities: string[] = [];
-
   ngAfterViewInit() {
     // get all the card titles in the carousel
     const cardTitles = document.querySelectorAll('.carousel-item .card-title');
@@ -71,28 +98,12 @@ export class HomeComponent implements OnInit {
       // extract the city name from the title
       const cityName = title.textContent?.trim();
 
-      // add the city name to the array 
+      // add the city name to the array
       if (cityName && !this.cityNames.includes(cityName)) {
         this.cityNames.push(cityName);
       }
     });
-
-    // make the dropdown toggle when the button is clicked
-    this.dropdownBtn.nativeElement.addEventListener('click', () => {
-      this.dropdownBtn.nativeElement.classList.toggle('show');
-    });
-
-    // hide the dropdown when the user clicks outside of it
-    window.addEventListener('click', (event) => {
-      if (!this.dropdownBtn.nativeElement.contains(event.target)) {
-        this.dropdownBtn.nativeElement.classList.remove('show');
-      }
-    });
   }
-
-  @ViewChild('carousel') carousel!: ElementRef;
-  @ViewChild('carousel') carouselRef!: ElementRef<HTMLDivElement>;
-  @ViewChild('card') cardRef!: ElementRef<HTMLDivElement>;
 
   onSearchInput(event: any) {
     const searchTerm = event.target.value.trim().toLowerCase();
@@ -101,16 +112,17 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  // go to the selected city from the list 
+  // go to the selected city from the list
   scrollToCity(cityName: string) {
     let carouselItem;
     let selecetCarouselItem;
 
-    // lista cu toate carousel-item urile mele din html    
-    const carouselItems = this.carousel.nativeElement.querySelectorAll('.carousel-item');
+    // lista cu toate carousel-item urile mele din html
+    const carouselItems =
+      this.carousel.nativeElement.querySelectorAll('.carousel-item');
     // find the index of the city in the carousel
-    const cityIndex = this.cityNames.findIndex(city => city === cityName);
-    
+    const cityIndex = this.cityNames.findIndex((city) => city === cityName);
+
     // gasim elementul activ
     carouselItem = this.carouselRef.nativeElement.querySelector(
       '.carousel-item.active'
@@ -123,15 +135,7 @@ export class HomeComponent implements OnInit {
     this.getForecastDaily(cityName);
   }
 
-  public Math = Math;         // get integer values
-  public title: any;
-  currentDate = new Date();    // get current date and hour automatically - no refresh needed      
-
-  temperature!: number;
-
-  showHourly = false;
-  showDaily = true;
-
+  // daily and hourly forecast
   showHourlyForecast() {
     this.showHourly = true;
     this.showDaily = false;
@@ -141,10 +145,6 @@ export class HomeComponent implements OnInit {
     this.showHourly = false;
     this.showDaily = true;
   }
-
-  // daily and hourly forecast
-  dailyForecastData: any;
-  hourlyForecastData: any;
 
   public getWeather(event: MouseEvent) {
     let carouselItem;
@@ -179,9 +179,10 @@ export class HomeComponent implements OnInit {
 
   getForecastDaily(city: string) {
     this.showDailyForecast();
-    this.weatherService.getDailyForecast(city).subscribe((data) => {
+    this.weatherService.getForecast(city).subscribe((data) => {
       this.dailyForecastData = data;
       this.temperature = data.current.temp_c;
+      this.condition = data.current.condition.text;
     });
   }
 
@@ -201,7 +202,7 @@ export class HomeComponent implements OnInit {
 
   getForecastHourly(city: string) {
     this.showHourlyForecast();
-    this.weatherService.getDailyForecast(city).subscribe((data) => {
+    this.weatherService.getForecast(city).subscribe((data) => {
       this.hourlyForecastData = data;
     });
   }
