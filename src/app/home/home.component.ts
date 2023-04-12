@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   @ViewChild('carousel') carouselRef!: ElementRef<HTMLDivElement>;
   @ViewChild('card') cardRef!: ElementRef<HTMLDivElement>;
   @ViewChild('dropdownBtn', { static: true }) dropdownBtn!: ElementRef;
-  
 
   temperature!: number;
   condition: string = '';
@@ -41,7 +40,8 @@ export class HomeComponent implements OnInit {
     this.filteredCities = this.cityNames;
 
     // hide the dropdown when clicking outside of it
-    const dropdownMenu = this.elementRef.nativeElement.querySelector('.dropdown-menu');
+    const dropdownMenu =
+      this.elementRef.nativeElement.querySelector('.dropdown-menu');
     dropdownMenu.addEventListener('click', (event: Event) => {
       event.stopPropagation();
     });
@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit {
     this.weatherService.getCurrentWeather().subscribe((temp) => {
       this.temperature = temp.current.temp_c;
       this.condition = temp.current.condition.text;
+      this.changeTheme(this.condition);
     });
 
     this.getForecastDaily('Cluj-Napoca');
@@ -62,6 +63,83 @@ export class HomeComponent implements OnInit {
     setInterval(() => {
       this.currentDate = new Date(); // update currentDate property every second
     }, 1000);
+  }
+
+  // change theme depending on weather conditions
+  changeTheme(theme: string) {
+    let backgroundImageUrl: string;
+
+    switch (this.condition) {
+      case 'Partly cloudy':
+        backgroundImageUrl = '/assets/images/partlyCloudy.jpg';
+        break;
+      case 'Sunny':
+        backgroundImageUrl = '/assets/images/sunny1.jpg';
+        break;
+      case 'Rainy':
+        backgroundImageUrl = '/assets/images/rainy.jpg';
+        break;
+      case 'Cloudy':
+        backgroundImageUrl = '/assets/images/cloudy.jpg';
+        break;
+      case 'Overcast':
+        backgroundImageUrl = '/assets/images/overcast.jpg';
+        break;
+      case 'Mist':
+        backgroundImageUrl = '/assets/images/mist.jpg';
+        break;
+      case 'Patchy rain possible':
+        backgroundImageUrl = '/assets/images/patchyRainPossible.jpg';
+        break;
+      case 'Patchy snow possible':
+        backgroundImageUrl = '/assets/images/patchySnowPossible.jpg';
+        break;
+      case 'Fog':
+        backgroundImageUrl = '/assets/images/fog.jpg';
+        break;
+      case 'Light drizzle':
+        backgroundImageUrl = '/assets/images/lightDrizzle.jpg';
+        break;
+      case 'Patchy light rain':
+        backgroundImageUrl = '/assets/images/patchyRainPossible.jpg';
+        break;
+      case 'Light rain':
+        backgroundImageUrl = '/assets/images/lightRain.jpg';
+        break;
+      case 'Light rain shower':
+          backgroundImageUrl = '/assets/images/lightRainShower.jpg';
+          break;
+      case 'Moderate rain':
+        backgroundImageUrl = '/assets/images/moderateRain.jpg';
+        break;
+      case 'Heavy rain':
+        backgroundImageUrl = '/assets/images/heavyRain.jpg';
+        break;
+      case 'Light sleet':
+        backgroundImageUrl = '/assets/images/lightSleet.jpg';
+        break;
+      case 'Patchy light snow':
+        backgroundImageUrl = '/assets/images/patchyLightSnow.jpg';
+        break;
+      case 'Light snow':
+        backgroundImageUrl = '/assets/images/patchyLightSnow.jpg';
+        break;
+      case 'Moderate snow':
+        backgroundImageUrl = '/assets/images/moderateSnow.jpg';
+        break;
+      case 'Heavy snow':
+        backgroundImageUrl = '/assets/images/heavySnow.jpg';
+        break;
+      default:
+        backgroundImageUrl = '/assets/images/bg9.jpg';
+    }
+
+    const bgImage = document.querySelector('.bg-home') as HTMLImageElement;
+    bgImage?.classList.add('hidden');
+    bgImage?.addEventListener('load', () => {
+      bgImage.classList.remove('hidden');
+    });
+    bgImage.src = backgroundImageUrl;
   }
 
   // add city to favorites
@@ -183,6 +261,7 @@ export class HomeComponent implements OnInit {
       this.dailyForecastData = data;
       this.temperature = data.current.temp_c;
       this.condition = data.current.condition.text;
+      this.changeTheme(this.condition);
     });
   }
 

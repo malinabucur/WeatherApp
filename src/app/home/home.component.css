@@ -61,14 +61,14 @@
   font: bold;
   font-weight: 100;
   /* top right bottom left */
-  margin: 10px 0 0 15px;
+  margin: 0 0 0 15px;
 }
 
 .weatherCondition{
   color: white;
   font-size: 18px;
   font-weight: 400;
-  margin-left: 22px;
+  margin-top: 2px;
 }
 
 /* second cards */
@@ -214,10 +214,10 @@ hr {
 
 @media screen and (max-width: 480px){
   .hourly-weather {
-    height: 400px;
+    height: 370px;
   }
   
   .daily-weather{
-    height: 400px;
+    height: 370px;
   }
 }

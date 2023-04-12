@@ -1,12 +1,14 @@
+<body>
+
 <!-- checking available cities -->
 <div class="dropdown">
-  <button 
-    class="btn btn-secondary dropdown-toggle" 
-    type="button" 
-    id="dropdownMenuButton1" 
-    data-bs-toggle="dropdown" 
-    aria-expanded="false" 
-    #dropdownBtn 
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton1"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    #dropdownBtn
     data-bs-auto-close="outside">
     Available Cities
   </button>
@@ -41,7 +43,7 @@
                     <h5 class="card-title">
                        Cluj-Napoca
                     </h5>
-                    <!-- <p class="weatherCondition">{{condition}}</p> -->
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -51,8 +53,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -78,10 +78,10 @@
 
             <!-- content -->
             <!-- forecast on hours or weeks days -->
-            <div 
+            <div
               class="d-flex daily-weather col-4 col-sm-6 col-md-8 col-lg-12"
               *ngIf="showDaily; dailyForecastData">
-              <div 
+              <div
                 *ngFor="
                   let forecast of dailyForecastData?.forecast?.forecastday.slice(1)">
                 <div class="card  second-card">
@@ -141,6 +141,7 @@
                     <h5 class="card-title">
                       Bucuresti
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -150,8 +151,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -239,6 +238,7 @@
                     <h5 class="card-title">
                       Brasov
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -248,8 +248,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -337,6 +335,7 @@
                     <h5 class="card-title">
                       Timisoara
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -346,8 +345,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -435,6 +432,7 @@
                     <h5 class="card-title">
                       Iasi
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -444,8 +442,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -533,6 +529,7 @@
                     <h5 class="card-title">
                       Sibiu
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -542,8 +539,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -631,6 +626,7 @@
                     <h5 class="card-title">
                       Constanta
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -640,8 +636,7 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
+
                   </div>
                 </div>
               </div>
@@ -729,6 +724,7 @@
                     <h5 class="card-title">
                       Satu Mare
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -738,8 +734,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -827,6 +821,7 @@
                     <h5 class="card-title">
                       Arad
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -836,8 +831,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -925,6 +918,7 @@
                     <h5 class="card-title">
                       Alba Iulia
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -934,8 +928,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1021,8 +1013,9 @@
                   <i class="fa-solid fa-location-dot location-icon"></i>
                   <div class="col-2">
                     <h5 class="card-title">
-                      Bistrita 
+                      Bistrita
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -1032,8 +1025,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1121,6 +1112,7 @@
                     <h5 class="card-title">
                       Hunedoara
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -1130,8 +1122,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1219,6 +1209,7 @@
                     <h5 class="card-title">
                       Piatra Neamt
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -1228,8 +1219,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1317,6 +1306,7 @@
                     <h5 class="card-title">
                       Botosani
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -1326,8 +1316,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1415,6 +1403,7 @@
                     <h5 class="card-title">
                       Bacau
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -1424,8 +1413,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1513,6 +1500,7 @@
                     <h5 class="card-title">
                       Galati
                     </h5>
+                    <p class="weatherCondition">{{condition}}</p>
                     <p class="d-flex currentDate">
                       {{ currentDate | date : "EE dd MMMM HH:mm a" }}
                       <span class="fav-button heart-icon" (click)="addToFav($event)" [class.selected]="isFavorite">
@@ -1522,8 +1510,6 @@
                   </div>
                   <div class="col-3">
                     <p class="currentTemperature">{{ Math.floor(temperature) }}&deg;C</p>
-                    <br>
-                    <p class="weatherCondition">{{condition}}</p>
                   </div>
                 </div>
               </div>
@@ -1621,4 +1607,7 @@
   </button>
 </div>
 
-<img class="bg-home" src="/assets/images/bg5.jpg"> 
+</body>
+
+<!-- <img class="bg-home" src="/assets/images/bg5.jpg"> -->
+<img class="bg-home hidden" alt="background image" >
