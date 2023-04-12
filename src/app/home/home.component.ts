@@ -65,83 +65,6 @@ export class HomeComponent implements OnInit {
     }, 1000);
   }
 
-  // change theme depending on weather conditions
-  changeTheme(theme: string) {
-    let backgroundImageUrl: string;
-
-    switch (this.condition) {
-      case 'Partly cloudy':
-        backgroundImageUrl = '/assets/images/partlyCloudy.jpg';
-        break;
-      case 'Sunny':
-        backgroundImageUrl = '/assets/images/sunny1.jpg';
-        break;
-      case 'Rainy':
-        backgroundImageUrl = '/assets/images/rainy.jpg';
-        break;
-      case 'Cloudy':
-        backgroundImageUrl = '/assets/images/cloudy.jpg';
-        break;
-      case 'Overcast':
-        backgroundImageUrl = '/assets/images/overcast.jpg';
-        break;
-      case 'Mist':
-        backgroundImageUrl = '/assets/images/mist.jpg';
-        break;
-      case 'Patchy rain possible':
-        backgroundImageUrl = '/assets/images/patchyRainPossible.jpg';
-        break;
-      case 'Patchy snow possible':
-        backgroundImageUrl = '/assets/images/patchySnowPossible.jpg';
-        break;
-      case 'Fog':
-        backgroundImageUrl = '/assets/images/fog.jpg';
-        break;
-      case 'Light drizzle':
-        backgroundImageUrl = '/assets/images/lightDrizzle.jpg';
-        break;
-      case 'Patchy light rain':
-        backgroundImageUrl = '/assets/images/patchyRainPossible.jpg';
-        break;
-      case 'Light rain':
-        backgroundImageUrl = '/assets/images/lightRain.jpg';
-        break;
-      case 'Light rain shower':
-          backgroundImageUrl = '/assets/images/lightRainShower.jpg';
-          break;
-      case 'Moderate rain':
-        backgroundImageUrl = '/assets/images/moderateRain.jpg';
-        break;
-      case 'Heavy rain':
-        backgroundImageUrl = '/assets/images/heavyRain.jpg';
-        break;
-      case 'Light sleet':
-        backgroundImageUrl = '/assets/images/lightSleet.jpg';
-        break;
-      case 'Patchy light snow':
-        backgroundImageUrl = '/assets/images/patchyLightSnow.jpg';
-        break;
-      case 'Light snow':
-        backgroundImageUrl = '/assets/images/patchyLightSnow.jpg';
-        break;
-      case 'Moderate snow':
-        backgroundImageUrl = '/assets/images/moderateSnow.jpg';
-        break;
-      case 'Heavy snow':
-        backgroundImageUrl = '/assets/images/heavySnow.jpg';
-        break;
-      default:
-        backgroundImageUrl = '/assets/images/bg9.jpg';
-    }
-
-    const bgImage = document.querySelector('.bg-home') as HTMLImageElement;
-    bgImage?.classList.add('hidden');
-    bgImage?.addEventListener('load', () => {
-      bgImage.classList.remove('hidden');
-    });
-    bgImage.src = backgroundImageUrl;
-  }
-
   // add city to favorites
   onFavListChanged(favorites: string[]) {
     this.favorites = favorites;
@@ -319,5 +242,82 @@ export class HomeComponent implements OnInit {
   // getting the current hour for the hourly forecast
   getCurrentHour(): number {
     return new Date().getHours();
+  }
+
+  // change theme depending on weather conditions
+  changeTheme(theme: string) {
+    let backgroundImageUrl: string;
+
+    switch (this.condition) {
+      case 'Partly cloudy':
+        backgroundImageUrl = '/assets/images/partlyCloudy.jpg';
+        break;
+      case 'Sunny':
+        backgroundImageUrl = '/assets/images/sunny1.jpg';
+        break;
+      case 'Rainy':
+        backgroundImageUrl = '/assets/images/rainy.jpg';
+        break;
+      case 'Cloudy':
+        backgroundImageUrl = '/assets/images/cloudy.jpg';
+        break;
+      case 'Overcast':
+        backgroundImageUrl = '/assets/images/overcast.jpg';
+        break;
+      case 'Mist':
+        backgroundImageUrl = '/assets/images/mist.jpg';
+        break;
+      case 'Patchy rain possible':
+        backgroundImageUrl = '/assets/images/patchyRainPossible.jpg';
+        break;
+      case 'Patchy snow possible':
+        backgroundImageUrl = '/assets/images/patchySnowPossible.jpg';
+        break;
+      case 'Fog':
+        backgroundImageUrl = '/assets/images/fog.jpg';
+        break;
+      case 'Light drizzle':
+        backgroundImageUrl = '/assets/images/lightDrizzle.jpg';
+        break;
+      case 'Patchy light rain':
+        backgroundImageUrl = '/assets/images/patchyRainPossible.jpg';
+        break;
+      case 'Light rain':
+        backgroundImageUrl = '/assets/images/lightRain.jpg';
+        break;
+      case 'Light rain shower':
+          backgroundImageUrl = '/assets/images/lightRainShower.jpg';
+          break;
+      case 'Moderate rain':
+        backgroundImageUrl = '/assets/images/moderateRain.jpg';
+        break;
+      case 'Heavy rain':
+        backgroundImageUrl = '/assets/images/heavyRain.jpg';
+        break;
+      case 'Light sleet':
+        backgroundImageUrl = '/assets/images/lightSleet.jpg';
+        break;
+      case 'Patchy light snow':
+        backgroundImageUrl = '/assets/images/patchyLightSnow.jpg';
+        break;
+      case 'Light snow':
+        backgroundImageUrl = '/assets/images/patchyLightSnow.jpg';
+        break;
+      case 'Moderate snow':
+        backgroundImageUrl = '/assets/images/moderateSnow.jpg';
+        break;
+      case 'Heavy snow':
+        backgroundImageUrl = '/assets/images/heavySnow.jpg';
+        break;
+      default:
+        backgroundImageUrl = '/assets/images/bg9.jpg';
+    }
+
+    const bgImage = document.querySelector('.bg-home') as HTMLImageElement;
+    bgImage?.classList.add('hidden');
+    bgImage?.addEventListener('load', () => {
+      bgImage.classList.remove('hidden');
+    });
+    bgImage.src = backgroundImageUrl;
   }
 }
