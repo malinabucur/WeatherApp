@@ -29,3 +29,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 * The users can add cities to a favorites list by clicking on the heart icon found on each card:
 
 ![fav button list](https://user-images.githubusercontent.com/109577091/231239908-ed79799a-9f2b-4d9c-a29c-f772191786a0.png)
+
+* The application also has multiple themes depending on the weather condition for each city. Here are some examples:
+
+![themes](https://user-images.githubusercontent.com/109577091/231402274-e9a4d017-6472-43ae-8ed3-ac009ef55159.png)
+
+
